@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className=" relative overflow-hidden pt-32 pb-20  flex items-center justify-center">
       <div 
-        className="bg-[#FEF7EA] w-[45%] h-full rounded-bl-[260px] absolute -top-16 right-0" 
+        className="bg-brand-cream w-[45%] h-full rounded-bl-[260px] absolute -top-16 right-0" 
       />
       
       <div className="max-w-7xl px-10 grid grid-cols-1 md:grid-cols-2 items-center  gap-50">
