@@ -26,8 +26,8 @@ export default function MenuPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    setLoading(true);
+  const fetchData = async (isInitial = false) => {
+    if (isInitial) setLoading(true);
     try {
       const [catRes, itemRes] = await Promise.all([
         fetch("http://localhost:5000/api/categories"),
@@ -43,12 +43,16 @@ export default function MenuPage() {
     } catch (err) {
       console.error("Failed to fetch menu data", err);
     } finally {
-      setLoading(false);
+      if (isInitial) setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData(true);
+    const interval = setInterval(() => {
+      fetchData(false);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const filteredItems =
@@ -96,6 +100,7 @@ export default function MenuPage() {
             {filteredItems.map((item) => (
               <MenuCard
                 key={item.id}
+                id={item.id}
                 name={item.name}
                 description={item.description || ""}
                 price={Number(item.price)}
