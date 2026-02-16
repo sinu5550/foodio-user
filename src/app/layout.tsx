@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ConditionalLayout from "@/components/ConditionalLayout";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Foodio - Restaurant Ordering System",
@@ -19,6 +20,21 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <ConditionalLayout>{children}</ConditionalLayout>
+        <Toaster
+          position="top-right"
+          expand={false}
+          richColors
+          closeButton
+          toastOptions={{
+            style: {
+              background: "white",
+              color: "#1A3C34",
+              border: "1px solid rgba(26, 60, 52, 0.1)",
+              borderRadius: "16px",
+            },
+            className: "font-brand-manrope",
+          }}
+        />
       </body>
     </html>
   );

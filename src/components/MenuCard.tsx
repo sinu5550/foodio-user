@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import OrderModal from "./OrderModal";
+import { toast } from "sonner";
 
 interface MenuCardProps {
   id: string;
@@ -24,9 +25,12 @@ export default function MenuCard({
 
   const handleOrderConfirm = async (quantity: number) => {
     try {
+      const token = localStorage.getItem("token");
       const userStr = localStorage.getItem("user");
-      if (!userStr) {
-        alert("Please login to place an order");
+
+      if (!token || !userStr) {
+        toast.error("Please login to place an order");
+        window.location.href = "/auth/signin";
         return;
       }
 
@@ -46,13 +50,6 @@ export default function MenuCard({
         ],
       };
 
-      const token = localStorage.getItem("token");
-      if (!token) {
-        alert("Please login to place an order");
-        window.location.href = "/auth/signin";
-        return;
-      }
-
       const response = await fetch("http://localhost:5000/api/orders", {
         method: "POST",
         headers: {
@@ -69,10 +66,18 @@ export default function MenuCard({
       const data = await response.json();
       console.log("Order created:", data);
 
-      window.location.href = "/orders";
+      toast.success(
+        <span>
+          <strong>{name}</strong> Ordered Successfully!
+        </span>,
+      );
+
+      setTimeout(() => {
+        window.location.href = "/orders";
+      }, 2000);
     } catch (error) {
       console.error("Error placing order:", error);
-      alert("Failed to place order. Please try again.");
+      toast.error("Failed to place order. Please try again.");
     }
   };
 
