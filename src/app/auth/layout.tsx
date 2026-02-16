@@ -72,7 +72,7 @@ export default function AuthLayout({
           <div className="w-4 h-4 rounded-full border border-brand-green/40 flex items-center justify-center text-[10px]">
             i
           </div>
-          For accessing Admin Panel press A from your keyboard.
+          For accessing Admin Panel press Ctrl +A from your keyboard.
         </div>
       </main>
 
