@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
-export default function SignInPage() {
+function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
@@ -24,7 +25,8 @@ export default function SignInPage() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "a") {
         e.preventDefault();
-        window.location.href = "http://localhost:3001";
+        window.location.href =
+          process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3001";
       }
     };
 
@@ -38,13 +40,16 @@ export default function SignInPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData),
-      });
+      );
 
       const data = await response.json();
 
@@ -111,5 +116,19 @@ export default function SignInPage() {
         {loading ? "Signing in..." : "Sign In"}
       </button>
     </form>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center py-8 w-full">
+          <Spinner size={32} />
+        </div>
+      }
+    >
+      <SignInForm />
+    </Suspense>
   );
 }

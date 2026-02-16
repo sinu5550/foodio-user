@@ -30,8 +30,12 @@ export default function MenuPage() {
     if (isInitial) setLoading(true);
     try {
       const [catRes, itemRes] = await Promise.all([
-        fetch("http://localhost:5000/api/categories"),
-        fetch("http://localhost:5000/api/menu-item"),
+        fetch(
+          `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/categories`,
+        ),
+        fetch(
+          `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/menu-item`,
+        ),
       ]);
 
       const catData: Category[] = await catRes.json();

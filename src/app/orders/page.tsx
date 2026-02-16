@@ -55,12 +55,15 @@ export default function MyOrdersPage() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/orders/my", {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/orders/my`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          cache: "no-store",
         },
-        cache: "no-store",
-      });
+      );
 
       if (response.status === 401) {
         // Token expired or invalid
@@ -115,7 +118,6 @@ export default function MyOrdersPage() {
                   key={order.id}
                   className="bg-[#FBFAF8] rounded-2xl p-8 shadow-xs border border-[#E6E2D8]"
                 >
-                  
                   <div className="flex items-start justify-between mb-6">
                     <div>
                       <h3 className="text-xl font-bold text-brand-green font-brand-manrope">
@@ -152,7 +154,6 @@ export default function MyOrdersPage() {
                     </div>
                   </div>
 
-                  
                   <div className="mb-6">
                     <p className="text-sm font-medium text-brand-green/60 mb-3">
                       ITEMS
@@ -172,7 +173,7 @@ export default function MyOrdersPage() {
                     ))}
                   </div>
                   <hr className="border-brand-green/20 mb-6" />
-                  
+
                   <div className="mb-6">
                     <p className="text-sm text-brand-green/60">
                       <span className="font-semibold text-brand-green">
@@ -182,12 +183,9 @@ export default function MyOrdersPage() {
                     </p>
                   </div>
 
-                  
                   <div className="relative pt-2 w-[70%] mx-auto">
-                    
                     <div className="absolute top-4 left-0 w-full h-0.5 bg-brand-green/20 -translate-y-1/2" />
 
-                    
                     <div
                       className="absolute top-4 left-0 h-0.5 bg-brand-green -translate-y-1/2 transition-all duration-500 ease-in-out"
                       style={{
@@ -195,7 +193,6 @@ export default function MyOrdersPage() {
                       }}
                     />
 
-                    
                     <div className="relative flex justify-between">
                       {statusSteps.map((step, index) => {
                         const isActive = index <= currentStatusIndex;

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
@@ -26,7 +27,8 @@ export default function RegisterPage() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "a") {
         e.preventDefault();
-        window.location.href = "http://localhost:3001";
+        window.location.href =
+          process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3001";
       }
     };
 
@@ -40,13 +42,16 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData),
-      });
+      );
 
       const data = await response.json();
 
@@ -146,5 +151,19 @@ export default function RegisterPage() {
         {loading ? "Creating account..." : "Create Account"}
       </button>
     </form>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center py-8 w-full">
+          <Spinner size={32} />
+        </div>
+      }
+    >
+      <RegisterForm />
+    </Suspense>
   );
 }
