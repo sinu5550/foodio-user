@@ -13,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="antialiased font-brand-manrope text-brand-green bg-white">
+    <html lang="en">
+      <body
+        className="antialiased font-brand-manrope text-brand-green bg-white"
+        suppressHydrationWarning
+      >
         <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
