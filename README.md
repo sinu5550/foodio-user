@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Foodio User (Frontend)
 
-## Getting Started
+A sleek, premium, and responsive food ordering experience. Built with Next.js and designed for visual excellence.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Website**: https://foodio-user-siyan.vercel.app/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: Tailwind CSS & ShadCN
+- **State Management**: React Hooks (useState, useEffect)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Notifications**: [Sonner](https://sonner.emilkowal.ski/) (Toast notifications)
+- **Deployment**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Key Features
 
-## Learn More
+- **Premium Design**: Modern, glassmorphic UI with vibrant HSL color palettes and smooth gradients.
+- **Dynamic Menu**: Real-time menu updates featuring categorized showcases.
+- **Seamless Ordering**: Integrated order modal with quantity management.
+- **Live Order Tracking**: Dynamic polling for real-time order status updates.
+- **Developer Shortcut**: `Ctrl + A` global shortcut to instantly navigate to the Admin Dashboard (environment-configured).
+- **Responsive Layout**: Pixel-perfect performance across mobile, tablet, and desktop.
+- **Form Validation**: Secure authentication flows with interactive feedback.
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/components/CategoryShowcase`: Dynamic category filter and live menu fetcher.
+- `src/components/MenuCard`: Interactive product card with order integration.
+- `src/app/orders`: Real-time order monitoring dashboard.
+- `src/app/auth`: Optimized Sign-in and Registration with Suspense boundaries.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚙️ Installation & Setup (Local)
 
-## Deploy on Vercel
+1. **Clone the repo**
+2. **Install dependencies**: `npm install`
+3. **Configure Environment Variables**:
+   Create a `.env` file:
+   ```env
+   NEXT_PUBLIC_API_URL="http://localhost:5000"
+   NEXT_PUBLIC_ADMIN_URL="http://localhost:3001"
+   ```
+4. **Run Development Server**: `npm run dev`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👨‍💻 Developed by
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[Intisar_Ahmed_Siyan] - Passionate Full-Stack Developer
